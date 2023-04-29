@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+    const root = document.getElementById("root");
+    function App() {
+        [counter, modifier] = React.useState(); //useState 는 [data,f] 이때 f는 data를 바꿀 수 있는함수. data는 초기값 설정 가능
+        //이는 counter=data[0], modifier=data[1]과 같음.
+
+        const Click = () => {
+            // counter += 1;
+            // ReactDOM.render(<App />,root);
+            modifier(9898989898);
+            counter = 9898989898;
+            ReactDOM.render(<App />, root);
+
+        };
+        return (<div>
+            <h3>Total clicks: {counter}</h3>
+            <button onClick={Click}>Click me</button>
+        </div>);
+    }
+    ReactDOM.render(<App />, root);
+
+</script>
+
+</html>
