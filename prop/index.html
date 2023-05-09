@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+    function Btn({ banana, big }) {
+        return <button
+            style={{
+                backgroundColor: "tomato",
+                color: "white",
+                border: 0,
+                padding: "10px 20px",
+                borderRadius: 10,
+                fontSize: big ? 18 : 10
+            }}>{banana}</button>
+    }
+
+    function App() {
+        return <div>
+            <Btn banana="Save Changes" big={true} />
+
+            <Btn banana="Continue" big={false} />
+
+        </div>;
+    }/*어떤 프롭스던지 Btn 안의 첫번째 인자로 들어감. 그리고 프롭스들은 오브젝트가 됨.*/
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+
+</script>
+
+</html>
