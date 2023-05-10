@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+</body>
+<script type="text/babel">
+
+    function App() {
+        const [amount, setMinutes] = React.useState();
+        const [flipped, setFlipped] = React.useState(false);
+        const onChange = (e) => {
+            setMinutes(e.target.value);
+        }
+        const reset = () => setMinutes(0);
+        const onFlip = () => {
+            reset();
+            setFlipped((current) => !current);
+        }
+
+        // flip 해줌. f->t , t->f 로 바꿔주기 => 만약 hour 입력 시 minute 
+        //변경 못하게 하고 싶으면 flip 버튼 눌러주면 되고, 돌아가고 싶으면 또 눌러주면 됨.
+
+        return (
+            <div>
+                <h1 className="hi">Super Converter</h1>
+                <label htmlFor="minutes">Minutes</label>
+                <input
+                    value={flipped ? amount * 60 : amount}
+                    id="minutes"
+                    placeholder="Minutes"
+                    type="number"
+                    onChange={onChange}
+                    //disabled={flipped === true}
+                    disabled={flipped}
+                // 만약 flipped 가 true 면 못바꾸게 하기.
+                />
+                <label htmlFor="hours">Hours</label>
+                <input
+                    value={flipped ? amount : Math.round(amount / 60)}
+                    //만약 flipped 가 true이면 disabled false이므로 
+                    // hour input은 변경 가능하고
+                    // value가 amount 가 된다.
+                    id="hours"
+                    placeholder="Hours"
+                    type='number'
+                    onChange={onChange}
+                    disabled={!flipped} />
+                <button onClick={reset}>Reset</button>
+                <button onClick={onFlip}>Flipped</button>
+            </div>
+
+        );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+
+</script>
+
+</html>
